@@ -11,8 +11,8 @@ const options = ref<ButtonProp>(props.classButtonInstace.getProps())
   <div
     :class="[
       'index flex',
-      `w-[${options.width}px]`,
-      `h-[${options.width}px]`,
+      options.width ? `w-[${options.width}px]` : 'w-fit',
+      options.width ? `h-[${options.width}px]` : 'h-fit',
       {
         'justify-center': options.contentCenter,
         'items-center': options.contentItemsCenter

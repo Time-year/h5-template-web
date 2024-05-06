@@ -35,7 +35,7 @@ const createPreview = (componentType: string) => {
         class="Index__preview w-[375px] h-[758px] flex justify-center items-center relative"
       >
         <div
-          class="Index__preview-main absolute top-11 overflow-hidden overflow-y-auto"
+          class="Index__preview-main px-2 pb-4 absolute top-11 overflow-hidden overflow-y-auto"
           id="preview-main"
         ></div>
       </div>

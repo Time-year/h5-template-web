@@ -17,7 +17,9 @@ export interface ButtonProp {
 class Button {
   private componentInstance: App<Element> | null = null
   private container: HTMLElement | null = null
-  constructor(private componentId: string, private option?: ButtonProp) {}
+  constructor(private componentId: string, private option?: ButtonProp) {
+    this.mountComponent()
+  }
 
   getProps() {
     return {
@@ -29,7 +31,7 @@ class Button {
     this.componentInstance = createApp(index, {
       classButtonInstace: reactive<typeof this>(this)
     })
-    const app = document.querySelector('#review-main')
+    const app = document.querySelector('#preview-main')
     if (!app) return
     this.container = document.createElement('div')
     this.container.classList.add(this.componentId)
@@ -40,7 +42,8 @@ class Button {
 
   unmountComponent() {
     if (!this.container) return
-    document.querySelector('#review-main')?.removeChild(this.container)
+    this.componentInstance?.unmount()
+    document.querySelector('#preview-main')?.removeChild(this.container)
   }
 }
 
