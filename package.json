@@ -9,10 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "@types/node": "^20.12.10",
     "animate.css": "^4.1.1",
+    "ant-design-vue": "4.x",
     "tailwindcss": "^3.4.3",
     "uuid": "^9.0.1",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",

@@ -13,6 +13,7 @@ const options = ref<ButtonProp>(props.classButtonInstace.getProps())
       'index flex',
       options.width ? `w-[${options.width}px]` : 'w-fit',
       options.width ? `h-[${options.width}px]` : 'h-fit',
+      'select-none',
       {
         'justify-center': options.contentCenter,
         'items-center': options.contentItemsCenter

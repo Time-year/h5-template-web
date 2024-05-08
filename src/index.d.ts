@@ -8,4 +8,9 @@ declare interface ComponentMapInterface {
   instance: any
 }
 
+declare interface Array<T> {
+  removeBy(params: (current: T) => boolean): T[]
+  removeBy(params: number): T[]
+}
+
 declare global {}

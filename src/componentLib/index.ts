@@ -3,25 +3,32 @@ import Button from './button/Button'
 import { ComponentEnum } from '../constant/enum'
 
 class ComponentWrapper {
-  private componentMap: WeakSet<ComponentMapInterface> = new WeakSet()
-  constructor(private componentType: string) {
-    this.init()
+  private componentMap: Array<ComponentMapInterface> = new Array()
+  private selectedComponentId: string = ''
+  constructor() {}
+
+  getComponentInstance(key: string) {
+    return this.componentMap.find(({ salt }) => salt === key)
   }
 
-  getComponentInstance(key: string) {}
-
-  init() {
+  addComponent(componentType: ComponentEnum) {
     const key = v4()
     const button = new Button(key, {
       content: '按钮',
       contentCenter: true,
       contentItemsCenter: true
     })
-    this.componentMap.add({
+    this.componentMap.push({
       salt: key,
       instance: button,
       type: ComponentEnum.Button
     })
+  }
+
+  removeComponent(componentId: string) {
+    this.componentMap = this.componentMap.removeBy(
+      ({ salt }) => salt != componentId
+    )
   }
 }
 

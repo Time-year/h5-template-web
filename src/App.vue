@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import ComponentWrapper from './componentLib'
+import { ComponentEnum } from './constant/enum'
 const isSideOpen = ref<boolean>(true)
 const component = ref<string>('Button')
-const componentInstance = ref<ComponentWrapper | null>(null)
-const createPreview = (componentType: string) => {
-  componentInstance.value = new ComponentWrapper(componentType)
+const componentInstance = reactive<ComponentWrapper>(new ComponentWrapper())
+const createPreview = (componentType: ComponentEnum) => {
+  componentInstance.addComponent(componentType)
 }
 </script>
 
@@ -21,7 +22,7 @@ const createPreview = (componentType: string) => {
             :class="[
               'component__list-item w-2/5  border-slate-300 cursor-pointer  border-2 border-dashed select-none'
             ]"
-            @click="() => createPreview('Button')"
+            @click="() => createPreview(ComponentEnum.Button)"
           >
             Button
           </div>
@@ -35,7 +36,7 @@ const createPreview = (componentType: string) => {
         class="Index__preview w-[375px] h-[758px] flex justify-center items-center relative"
       >
         <div
-          class="Index__preview-main px-2 pb-4 absolute top-11 overflow-hidden overflow-y-auto"
+          class="Index__preview-main px-2 pb-5 relative top-4 overflow-hidden overflow-y-auto"
           id="preview-main"
         ></div>
       </div>
@@ -53,9 +54,6 @@ const createPreview = (componentType: string) => {
 </template>
 
 <style scoped lang="less">
-.Index__main {
-}
-
 .Index__preview {
   background: url('/src/assets/img/phone.png') no-repeat center / 100% 100%;
 
@@ -63,6 +61,9 @@ const createPreview = (componentType: string) => {
     width: calc(100% - 40px);
     height: calc(100% - 60px);
     border-radius: 10px 10px 40px 40px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 </style>

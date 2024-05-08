@@ -1,5 +1,6 @@
-import { App } from 'vue'
+import { App, createRenderer } from 'vue'
 import index from './index.vue'
+import ComponentWrap from '../ComponentWrap.vue'
 
 export interface ButtonProp {
   width?: number
@@ -16,7 +17,8 @@ export interface ButtonProp {
 
 class Button {
   private componentInstance: App<Element> | null = null
-  private container: HTMLElement | null = null
+  private container: App<Element> | null = null
+  private template: HTMLElement | null = null
   constructor(private componentId: string, private option?: ButtonProp) {
     this.mountComponent()
   }
@@ -28,22 +30,34 @@ class Button {
   }
 
   mountComponent() {
+    const app = document.querySelector('#preview-main')
+    if (!app) return
+
+    this.template = document.createElement('div')
+    this.template.setAttribute('data-id', this.componentId)
+    app.appendChild(this.template)
+
+    this.container = createApp(ComponentWrap, {
+      componentId: this.componentId
+    })
+
+    this.container.mount(this.template)
+
     this.componentInstance = createApp(index, {
       classButtonInstace: reactive<typeof this>(this)
     })
-    const app = document.querySelector('#preview-main')
-    if (!app) return
-    this.container = document.createElement('div')
-    this.container.classList.add(this.componentId)
-    this.container.setAttribute('data-key', this.componentId)
-    app.appendChild(this.container)
-    this.componentInstance.mount(this.container)
+
+    const wrapEl = document.querySelector(`div[data-key='${this.componentId}']`)
+    this.componentInstance.mount(wrapEl as Element)
   }
 
   unmountComponent() {
     if (!this.container) return
     this.componentInstance?.unmount()
-    document.querySelector('#preview-main')?.removeChild(this.container)
+    this.container?.unmount()
+    document
+      .querySelector('#preview-main')
+      ?.removeChild(this.template as HTMLElement)
   }
 }
 
