@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
+import { VueUseComponentsResolver } from 'unplugin-vue-components/resolvers'
 import { resolve } from 'path'
 
 // https://vitejs.dev/config/
@@ -19,6 +20,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         ],
         imports: [
           'vue',
+          '@vueuse/core',
           {
             antd: []
           }
@@ -46,7 +48,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       port: 8088,
       proxy: {
         '/api': {
-          target: 'http://10.7.100.15:3000',
+          target: 'localhost:3000',
           changeOrigin: true,
           ws: true,
           rewrite: path => path.replace(/^\/api/, '')

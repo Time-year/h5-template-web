@@ -5,8 +5,12 @@ const routers: RouteRecordRaw[] = [
     redirect: '/index'
   },
   {
-    path: '/',
-    component: () => import('@/layout/index.vue')
+    path: '/index',
+    component: () => import('@/view/layout/index.vue')
+  },
+  {
+    path: '/login',
+    component: () => import('@/view/login/index.vue')
   }
 ]
 

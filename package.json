@@ -11,8 +11,10 @@
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
     "@types/node": "^20.12.10",
+    "@vueuse/core": "^10.9.0",
     "animate.css": "^4.1.1",
     "ant-design-vue": "4.x",
+    "postcss-px-to-viewport-8-plugin": "^1.2.5",
     "tailwindcss": "^3.4.3",
     "uuid": "^9.0.1",
     "vue": "^3.4.21",
